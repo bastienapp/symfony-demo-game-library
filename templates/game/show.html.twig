@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ game.title }}{% endblock %}
+
+{% block body %}
+    <img src="{{ game.picture }}" alt="{{ game.title }}" width="300">
+    <h3>{{ game.title }} - {{ game.rating }}/10</h3>
+    <p>{{ game.description }}</p>
+{% endblock %}
