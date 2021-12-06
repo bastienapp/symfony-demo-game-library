@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Game;
+use App\Repository\CommentRepository;
+use App\Repository\GameRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,9 +18,9 @@ class GameController extends AbstractController
     /**
      * @Route("/", name="index")
      */
-    public function index(): Response
+    public function index(GameRepository $gameRepository): Response
     {
-        $games = $this->getDoctrine()->getRepository(Game::class)->findAll();
+        $games = $gameRepository->findAll();
 
         return $this->render('game/index.html.twig', [
             'games' => $games,
@@ -27,10 +30,8 @@ class GameController extends AbstractController
     /**
      * @Route("/{id}", requirements={"id"="\d+"}, name="show")
      */
-    public function show(int $id): Response
+    public function show(Game $game): Response
     {
-        $game = $this->getDoctrine()->getRepository(Game::class)->findOneBy(['id' => $id]);
-
         return $this->render('game/show.html.twig', [
             'game' => $game,
         ]);
