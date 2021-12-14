@@ -28,6 +28,18 @@ class GameController extends AbstractController
     }
 
     /**
+     * @Route("/category/{categoryName}", name="show_by_category_name")
+     */
+    public function showByCategoryName(string $categoryName, GameRepository $gameRepository): Response
+    {
+        $games = $gameRepository->findByCategoryName($categoryName);
+
+        return $this->render('game/index.html.twig', [
+            'games' => $games,
+        ]);
+    }
+
+    /**
      * @Route("/{id}", requirements={"id"="\d+"}, name="show")
      */
     public function show(Game $game): Response
