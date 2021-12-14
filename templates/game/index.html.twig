@@ -3,13 +3,14 @@
 {% block title %}Game list{% endblock %}
 
 {% block body %}
-<ul>
-{% for game in games %}
-    <li>
-        <img src="{{ game.picture }}" alt="{{ game.title }}" width="200">
-        <h3>{{ game.title }}</h3>
-        <a href="{{ path('games_show', {'id': game.id}) }}">Voir le jeu</a>
-    </li>
-{% endfor %}
-</ul>
+    <ul>
+        {% for game in games %}
+            <li>
+                <a href="{{ path('games_show', {'id': game.id}) }}">
+                    <img src="{{ game.picture }}" alt="{{ game.title }}" width="200">
+                    <h3>{{ game.title }}</h3>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}
